@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
         }else if (guess < target){
             textHint.setText("Too low, try again!");
         }else{
-            textHint.setText("Correct. You win! Play agin!");
+            textHint.setText("Correct. You win! Play again!");
             startGame();
         }
     }
