@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.ojsb.caesarcipher.MainActivity"
+    tools:layout_editor_absoluteY="81dp"
+    tools:layout_editor_absoluteX="0dp">
+
+    <EditText
+        android:id="@+id/etInput"
+        android:layout_width="365dp"
+        android:layout_height="146dp"
+        android:ems="10"
+        android:inputType="textMultiLine"
+        android:text="Type your input string here!"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginRight="8dp"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <SeekBar
+        android:id="@+id/sbKey"
+        android:layout_width="227dp"
+        android:layout_height="35dp"
+        android:max="26"
+        android:progress="13"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/etInput"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintLeft_toLeftOf="parent" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="50dp"
+        android:layout_height="35dp"
+        android:text="Key:"
+        android:textAlignment="textEnd"
+        android:textSize="18sp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/etInput"
+        app:layout_constraintLeft_toRightOf="@+id/sbKey"
+        android:layout_marginLeft="8dp" />
+
+    <EditText
+        android:id="@+id/etKey"
+        android:layout_width="58dp"
+        android:layout_height="41dp"
+        android:ems="10"
+        android:inputType="number"
+        android:text="0"
+        android:layout_marginTop="-8dp"
+        app:layout_constraintTop_toBottomOf="@+id/etInput"
+        android:layout_marginRight="26dp"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <Button
+        android:id="@+id/btnEncode"
+        android:layout_width="356dp"
+        android:layout_height="42dp"
+        android:text="Encode"
+        app:layout_constraintTop_toBottomOf="@+id/sbKey"
+        android:layout_marginTop="8dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <EditText
+        android:id="@+id/etOutput"
+        android:layout_width="362dp"
+        android:layout_height="168dp"
+        android:ems="10"
+        android:inputType="textMultiLine"
+        android:text="Encoded output string shows here!"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/btnEncode"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginRight="8dp"
+        app:layout_constraintRight_toRightOf="parent" />
+</android.support.constraint.ConstraintLayout>
