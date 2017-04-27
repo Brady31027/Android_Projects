@@ -15,7 +15,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SoundPoolActivity"></activity>
+        <activity android:name=".SoundPoolActivity" />
+        <activity android:name=".MediaPlayerActivity"></activity>
     </application>
 
 </manifest>

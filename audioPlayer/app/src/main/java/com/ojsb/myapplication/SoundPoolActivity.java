@@ -88,6 +88,7 @@ public class SoundPoolActivity extends AppCompatActivity {
         // 1st: context
         // 2nd: resource id
         // 3rd: priority
+        //TODO: add more audio file types, such as .wav, .mp3, .odd
         mSoundId = mSoundPool.load(SoundPoolActivity.this, R.raw.sheep_sound, 1);
         mSoundPool.setOnLoadCompleteListener(new SoundPool.OnLoadCompleteListener() {
             @Override
