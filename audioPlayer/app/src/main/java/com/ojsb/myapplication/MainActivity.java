@@ -24,7 +24,9 @@ public class MainActivity extends AppCompatActivity {
         mBtnAudioTrack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MainActivity.this, "Go to AudioTrack", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent();
+                intent.setClass(MainActivity.this, AudioTrackActivity.class);
+                startActivity(intent);
             }
         });
 

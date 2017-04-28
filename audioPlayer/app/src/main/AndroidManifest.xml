@@ -16,7 +16,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".SoundPoolActivity" />
-        <activity android:name=".MediaPlayerActivity"></activity>
+        <activity android:name=".MediaPlayerActivity" />
+        <activity android:name=".AudioTrackActivity"></activity>
     </application>
 
 </manifest>

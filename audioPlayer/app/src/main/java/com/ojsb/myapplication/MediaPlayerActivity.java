@@ -12,7 +12,7 @@ public class MediaPlayerActivity extends Activity {
     // TODO: add streaming and more file format
     // TODO: add progress showing
     // TODO: add seeking
-    
+
     private TextView mTextState;
     private Button mBtnPlay;
     private Button mBtnStop;
