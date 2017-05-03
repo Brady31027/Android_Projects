@@ -1,13 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+
+<android.support.v7.widget.CardView
+    xmlns:card_view="http://schemas.andorid.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+    android:layout_margin="10dp"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:id="@+id/card_view"
+    card_view:cardCornerRadius="4dp">
 
     <TextView
         android:id="@+id/tv_rowitem"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="TextView" />
-</LinearLayout>
+        android:padding="10dp"
+        android:text="TextView"
+        android:textAlignment="center" />
+
+</android.support.v7.widget.CardView>
