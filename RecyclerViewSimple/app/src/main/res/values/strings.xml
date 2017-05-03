@@ -13,6 +13,22 @@
         <item>C#</item>
         <item>Perl</item>
         <item>Objective-C</item>
+        <item>R</item>
+        <item>Bash</item>
+        <item>Javascript</item>
+        <item>Small Talk</item>
+        <item>Verilog</item>
+        <item>XML</item>
+        <item>CSS</item>
+        <item>HTML</item>
+        <item>AngularJS</item>
+        <item>VueJS</item>
+        <item>ReactJS</item>
+        <item>NodeJS</item>
+        <item>ButterKnife</item>
+        <item>Picaso</item>
+        <item>Expresso</item>
+        <item>MFC</item>
     </string-array>
 
 </resources>
