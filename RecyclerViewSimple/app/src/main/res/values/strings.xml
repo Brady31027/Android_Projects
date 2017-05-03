@@ -1,3 +1,18 @@
 <resources>
     <string name="app_name">RecyclerViewSimple</string>
+
+    <string-array name="skills">
+        <item>Python</item>
+        <item>Java</item>
+        <item>Android</item>
+        <item>Swift</item>
+        <item>C</item>
+        <item>C++</item>
+        <item>Ruby</item>
+        <item>Rails</item>
+        <item>C#</item>
+        <item>Perl</item>
+        <item>Objective-C</item>
+    </string-array>
+
 </resources>

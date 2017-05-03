@@ -23,10 +23,10 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter <RecyclerViewAdapt
     private String[] mSkills;
     private final LayoutInflater mLayoutInflater;
 
-    public RecyclerViewAdapter(Context context, String[] skills) {
+    public RecyclerViewAdapter(Context context) {
         mContext = context;
         mLayoutInflater = LayoutInflater.from(context);
-        mSkills = skills;
+        mSkills = context.getResources().getStringArray(R.array.skills);
     }
 
     @Override
