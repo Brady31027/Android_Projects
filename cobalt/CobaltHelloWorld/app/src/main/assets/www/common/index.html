@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"/>
+    <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+	<p> This is the web-based testing page for Cobalt framework</p>
+	<p id="hello">Pull to refresh!</p>
+
+	<script type="text/javascript" src="../platform/cobalt.js"></script>
+	<script>
+        cobalt.init({
+        	debug: true,
+        	//debugInBrowser: true,
+        	events: {
+        		"sayHello" : function( data, callback ) {
+                    cobalt.log('native is saying hello and sent data=', data);
+                },
+        		"pullToRefresh" : function (data, callback) {
+        			cobalt.log("Ask for refreshing...");
+        			doRefresh(callback);
+        			cobalt.log("Refreshing done.")
+        		}
+        	}
+        });
+
+        var msg = ["Hello, Oliver", "Hello, Jeremy", "Hello, Sam", "Hello, Brady"];
+        var i = 0;
+        var len = msg.length;
+        var hello = document.getElementById("hello");
+
+        function doRefresh(callback) {
+        	cobalt.log('do refreshing');
+        	i = i % len;
+        	hello.innerHTML = msg[i];
+        	i++;
+        	cobalt.sendCallback(callback);
+        }
+	</script>
+</body>
+</html>

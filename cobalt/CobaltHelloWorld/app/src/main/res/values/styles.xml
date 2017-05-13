@@ -1,0 +1,7 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppBaseTheme" parent="Theme.AppCompat.Light"></style>
+    <style name="AppTheme" parent="Theme.Cobalt.Light"></style>
+
+</resources>

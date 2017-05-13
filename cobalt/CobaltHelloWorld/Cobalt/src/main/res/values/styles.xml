@@ -1,0 +1,13 @@
+<resources>
+    <style name="Theme.Cobalt" parent="Theme.AppCompat.NoActionBar" />
+    <style name="Theme.Cobalt.Light" parent="Theme.AppCompat.Light.NoActionBar" />
+
+    <style name="ThemeOverlay.Cobalt.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="ThemeOverlay.Cobalt.Light.AppBarOverlay" parent="ThemeOverlay.AppCompat.Light">
+        <item name="colorControlNormal">?android:attr/textColorPrimary</item>
+        <item name="searchViewStyle">@style/Widget.AppCompat.SearchView.ActionBar</item>
+    </style>
+    <style name="ThemeOverlay.Cobalt.PopupOverlay" parent="ThemeOverlay.AppCompat.Dark" />
+    <style name="ThemeOverlay.Cobalt.Light.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+</resources>
