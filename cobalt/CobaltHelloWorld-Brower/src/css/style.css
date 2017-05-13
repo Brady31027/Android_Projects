@@ -10,7 +10,7 @@ body, html {
 
 body {
     height: 100%;
-    background: #3498DB;
+    background: #9495DB;
     color: #fff;
     font-family: "Helvetica Neue Light", Helvetica, Arial, sans-serif;
     font-size: 18px;
@@ -23,7 +23,7 @@ p {
 
 #hello {
     text-align: center;
-    margin-top: 37%;
+    margin-top: 30%;
     font-size: 30px;
     font-weight: bold;
     line-height: 1;
