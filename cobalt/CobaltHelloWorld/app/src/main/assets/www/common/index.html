@@ -6,8 +6,11 @@
     <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
-	<p> This is the web-based testing page for Cobalt framework</p>
+	<p> Testing app for Cobalt framework from MUS PE3</p>
 	<p id="hello">Pull to refresh!</p>
+
+    <a id="listview" onclick="goToListView()"> Click Me! </a> <!-- Button to listview-->
+
 
 	<script type="text/javascript" src="../platform/cobalt.js"></script>
 	<script>
@@ -22,6 +25,9 @@
         			cobalt.log("Ask for refreshing...");
         			doRefresh(callback);
         			cobalt.log("Refreshing done.")
+        		},
+        		"debugDump": function(){
+        		    cobalt.log("test1...");
         		}
         	}
         });
@@ -37,6 +43,18 @@
         	hello.innerHTML = msg[i];
         	i++;
         	cobalt.sendCallback(callback);
+        }
+
+        function goToListView(){
+            cobalt.log("navigation start");
+            cobalt.navigate.push({
+                page : "listview.html",
+                controller: "listViewController"
+            });
+        }
+
+        function debugDump(){
+            cobalt.log("test2...");
         }
 	</script>
 </body>
