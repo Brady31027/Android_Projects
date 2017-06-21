@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.ojsb.copypixel.MainActivity">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:layout_marginTop="30px"
+        android:layout_weight="0.5">
+
+        <ImageView
+            android:id="@+id/srcImageView1"
+            android:layout_width="64px"
+            android:layout_height="64px"
+            app:srcCompat="@drawable/instagram" />
+
+        <ImageView
+            android:id="@+id/srcImageView2"
+            android:layout_width="64px"
+            android:layout_height="64px"
+            app:srcCompat="@drawable/phone" />
+
+        <ImageView
+            android:id="@+id/srcImageView3"
+            android:layout_width="64px"
+            android:layout_height="64px"
+            app:srcCompat="@drawable/twitter" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:layout_weight="0.5">
+
+        <ImageView
+            android:id="@+id/dstImageView1"
+            android:layout_width="64px"
+            android:layout_height="64px"
+            app:srcCompat="@drawable/warning" />
+
+        <ImageView
+            android:id="@+id/dstImageView2"
+            android:layout_width="64px"
+            android:layout_height="64px"
+            app:srcCompat="@drawable/warning" />
+
+        <ImageView
+            android:id="@+id/dstImageView3"
+            android:layout_width="64px"
+            android:layout_height="64px"
+            app:srcCompat="@drawable/warning" />
+
+    </LinearLayout>
+</LinearLayout>
