@@ -23,6 +23,9 @@ public class MainActivity extends Activity {
     private Rect drawRect;
     private TextView debugMsg;
 
+    static boolean dumpAsPNG = false;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,14 +66,6 @@ public class MainActivity extends Activity {
 
     private Bitmap selfieByDrawingCache(Rect srcRect){
         Bitmap dst = parent.getDrawingCache();
-        // dump for debugging
-        /*
-        String outputFolder = getExternalFilesDir(null).getAbsolutePath();
-        try {
-            saveAsPNG(dst, outputFolder, "cavas");
-        }catch (IOException e){
-            Log.e("Save", "Cannot save as PNG file");
-        } */
         return dst;
     }
 
@@ -114,6 +109,17 @@ public class MainActivity extends Activity {
                                     String.valueOf(drawRect.top) + ", "+ String.valueOf(drawRect.bottom));
                             Bitmap pixelCopyBitmap = selfieByPixelCopy(drawRect);
                             Bitmap drawingCacheBitmap = selfieByDrawingCache(drawRect);
+
+                            // dump for debugging
+                            if (dumpAsPNG) {
+                                String outputFolder = getExternalFilesDir(null).getAbsolutePath();
+                                try {
+                                    saveAsPNG(pixelCopyBitmap, outputFolder, "pixelCopy");
+                                    saveAsPNG(drawingCacheBitmap, outputFolder, "drawingCache");
+                                } catch (IOException e) {
+                                    Log.e("Save", "Cannot save as PNG file");
+                                }
+                            }
 
                             int parentWidth = drawRect.right - drawRect.left;
                             int parentHeight = drawRect.bottom - drawRect.top;
