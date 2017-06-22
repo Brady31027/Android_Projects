@@ -1,0 +1,1 @@
+This application tries to load a static png file as the golden image, and draw this png to a SurfaceView. Finally, this app will copy the SurfaceView via PixelCopy. Ideally, the read-back SurfaceView should be exactly the same as the initial png image.
