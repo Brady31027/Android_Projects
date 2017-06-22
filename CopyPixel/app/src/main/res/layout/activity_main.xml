@@ -19,19 +19,7 @@
             android:id="@+id/srcImageView1"
             android:layout_width="64px"
             android:layout_height="64px"
-            app:srcCompat="@drawable/instagram" />
-
-        <ImageView
-            android:id="@+id/srcImageView2"
-            android:layout_width="64px"
-            android:layout_height="64px"
-            app:srcCompat="@drawable/phone" />
-
-        <ImageView
-            android:id="@+id/srcImageView3"
-            android:layout_width="64px"
-            android:layout_height="64px"
-            app:srcCompat="@drawable/twitter" />
+            app:srcCompat="@drawable/vector_drawable_scale_golden" />
     </LinearLayout>
 
     <LinearLayout
@@ -45,18 +33,5 @@
             android:layout_width="64px"
             android:layout_height="64px"
             app:srcCompat="@drawable/warning" />
-
-        <ImageView
-            android:id="@+id/dstImageView2"
-            android:layout_width="64px"
-            android:layout_height="64px"
-            app:srcCompat="@drawable/warning" />
-
-        <ImageView
-            android:id="@+id/dstImageView3"
-            android:layout_width="64px"
-            android:layout_height="64px"
-            app:srcCompat="@drawable/warning" />
-
     </LinearLayout>
 </LinearLayout>
