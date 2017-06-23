@@ -7,13 +7,13 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.VectorDrawable;
+import android.os.Build;
 import android.os.Handler;
 import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.File;
@@ -26,7 +26,7 @@ import java.io.IOException;
 
 public class MySurfaceView extends SurfaceView implements SurfaceHolder.Callback {
 
-    static boolean dumpPNG = false;
+    static boolean dumpPNG = true;
     static Handler handler = new Handler();
 
     public MySurfaceView(Context context) {
@@ -45,7 +45,7 @@ public class MySurfaceView extends SurfaceView implements SurfaceHolder.Callback
     private void updateStatus(final String str) {
         handler.post(new Runnable(){
             public void run(){
-                Toast.makeText(MySurfaceView.this.getContext(), str, Toast.LENGTH_LONG).show();
+                Toast.makeText(MySurfaceView.this.getContext(), str, Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -80,22 +80,34 @@ public class MySurfaceView extends SurfaceView implements SurfaceHolder.Callback
 
         final SurfaceView surfaceView = (SurfaceView) findViewById(R.id.surfaceView);
 
+        if (android.os.Build.VERSION.SDK_INT <= Build.VERSION_CODES.N_MR1) {
+            try {
+                Thread.sleep(500);
+            } catch (Exception e) {
+                Log.e("Sleep", "Cannot Sleep");
+            }
+        }
+
+        final Bitmap bitmap = screenShot(surfaceView);
+
         new Thread() {
             public void run() {
                 try {
                     // sleep a bit to wait for rendering
-                    Thread.sleep(500);
+                    if (android.os.Build.VERSION.SDK_INT > Build.VERSION_CODES.N_MR1) {
+                        Thread.sleep(1000);
 
-                    updateStatus("Selfie");
+                        updateStatus("Selfie");
 
-                    Thread.sleep(8000); // wait for 8 sec for the toast dismissing
-                    Log.e("Selfie", "Capturing");
-                    Bitmap bitmap = screenShot(surfaceView);
-
+                        Thread.sleep(3000); // wait for 3 sec for the toast dismissing
+                        Log.e("Selfie", "Capturing");
+                        Bitmap bitmap = screenShot(surfaceView);
+                    }
                     if (dumpPNG) {
                         String outputFolder = MySurfaceView.this.getContext().getExternalFilesDir(null).getAbsolutePath();
                         saveVectorDrawableIntoPNG(bitmap, outputFolder, "SurfaceView");
                     }
+
                 } catch (Exception e) {
                     Log.e("Thread", "Cannot get rect info in another thread");
                 }

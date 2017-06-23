@@ -31,6 +31,7 @@ public class SyncPixelCopy implements OnPixelCopyFinishedListener {
             return getResultLocked();
         }
     }
+
     private int getResultLocked() {
         try {
             this.wait(1000);
