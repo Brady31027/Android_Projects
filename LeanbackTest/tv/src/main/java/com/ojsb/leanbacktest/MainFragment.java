@@ -14,7 +14,6 @@
 
 package com.ojsb.leanbacktest;
 
-import android.content.Intent;
 import android.content.res.Resources.Theme;
 import android.os.Bundle;
 import android.os.Handler;
@@ -22,18 +21,12 @@ import android.support.v17.leanback.app.BackgroundManager;
 import android.support.v17.leanback.app.BrowseFragment;
 import android.support.v17.leanback.widget.ArrayObjectAdapter;
 import android.support.v17.leanback.widget.HeaderItem;
-import android.support.v17.leanback.widget.ImageCardView;
 import android.support.v17.leanback.widget.ListRow;
 import android.support.v17.leanback.widget.ListRowPresenter;
-import android.support.v17.leanback.widget.OnItemViewClickedListener;
 import android.support.v17.leanback.widget.Presenter;
-import android.support.v17.leanback.widget.Row;
-import android.support.v17.leanback.widget.RowPresenter;
-import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v17.leanback.widget.PresenterSelector;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 
 import java.util.HashMap;
 import java.util.List;
@@ -78,10 +71,12 @@ public class MainFragment extends BrowseFragment {
     private static final String TAG = "MainFragment";
 
     private static final int NUM_ROWS = 20;
+    private static final int START_ROW = 4;
+
     private static final int mInitialDelay = 0;
     private static final int mScrollInterval = 200;
     private static final int mScrollCount = 100;
-    private static final int START_ROW = 4;
+    private static final boolean mShadow = false;
 
     private final Handler mHandler = new Handler();
     private ArrayObjectAdapter mRowsAdapter;
@@ -104,22 +99,29 @@ public class MainFragment extends BrowseFragment {
 
         setupEventListeners();
 
-        // [old scrolling mechanism]
         startAutoScrollTimer(mInitialDelay, mScrollInterval, mScrollCount);
-
-        // [new scrolling mechanism]
         mScrollPatternGenerator = new ScrollPatternGenerator(START_ROW, NUM_ROWS - 1 - START_ROW);
     }
 
     @Override
     public void onDestroy() {
+        if (null != mAutoScrollTimer) {
+            mAutoScrollTimer.cancel();
+            mAutoScrollTimer = null;
+        }
         super.onDestroy();
+    }
+
+    @Override
+    public void onStop() {
+        mBackgroundManager.release();
+        super.onStop();
     }
 
     public void buildRowAdapterItems(HashMap<String, List<Movie>> data) {
 
         ListRowPresenter rowPresenter = new ListRowPresenter();
-        rowPresenter.setShadowEnabled(true);
+        rowPresenter.setShadowEnabled(mShadow);
 
         mRowsAdapter = new ArrayObjectAdapter(rowPresenter);
         CardPresenter cardPresenter = new CardPresenter();
@@ -144,6 +146,7 @@ public class MainFragment extends BrowseFragment {
 
         mBackgroundManager = BackgroundManager.getInstance(getActivity());
         mBackgroundManager.attach(getActivity().getWindow());
+        mBackgroundManager.setDrawable(getActivity().getResources().getDrawable(R.drawable.default_background, getContext().getTheme()));
         mMetrics = new DisplayMetrics();
         getActivity().getWindowManager().getDefaultDisplay().getMetrics(mMetrics);
     }
@@ -161,6 +164,13 @@ public class MainFragment extends BrowseFragment {
         setBrandColor(getResources().getColor(R.color.fastlane_background, theme));
         // set search icon color
         setSearchAffordanceColor(getResources().getColor(R.color.search_opaque, theme));
+
+        setHeaderPresenterSelector(new PresenterSelector() {
+            @Override
+            public Presenter getPresenter(Object item) {
+                return new IconHeaderItemPresenter();
+            }
+        });
     }
 
     private void setupEventListeners() {
@@ -168,43 +178,10 @@ public class MainFragment extends BrowseFragment {
 
             @Override
             public void onClick(View view) {
-                Toast.makeText(getActivity(), "Implement your own in-app search", Toast.LENGTH_LONG)
-                        .show();
+                // nothing happens here
             }
         });
-
-        setOnItemViewClickedListener(new ItemViewClickedListener());
     }
-
-
-    private final class ItemViewClickedListener implements OnItemViewClickedListener {
-        @Override
-        public void onItemClicked(Presenter.ViewHolder itemViewHolder, Object item,
-                                  RowPresenter.ViewHolder rowViewHolder, Row row) {
-
-            if (item instanceof Movie) {
-                Movie movie = (Movie) item;
-                Log.d(TAG, "Item: " + item.toString());
-                Intent intent = new Intent(getActivity(), DetailsActivity.class);
-                intent.putExtra(DetailsActivity.MOVIE, movie);
-
-                Bundle bundle = ActivityOptionsCompat.makeSceneTransitionAnimation(
-                        getActivity(),
-                        ((ImageCardView) itemViewHolder.view).getMainImageView(),
-                        DetailsActivity.SHARED_ELEMENT_NAME).toBundle();
-                getActivity().startActivity(intent, bundle);
-            } else if (item instanceof String) {
-                if (((String) item).indexOf(getString(R.string.error_fragment)) >= 0) {
-                    Intent intent = new Intent(getActivity(), BrowseErrorActivity.class);
-                    startActivity(intent);
-                } else {
-                    Toast.makeText(getActivity(), ((String) item), Toast.LENGTH_SHORT)
-                            .show();
-                }
-            }
-        }
-    }
-
 
     private class UpdateAutoScrollTask extends TimerTask {
         // TODO
