@@ -15,6 +15,7 @@
 package com.ojsb.leanbacktest;
 
 import android.content.Intent;
+import android.content.res.Resources.Theme;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -37,24 +38,65 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.content.res.Resources.Theme;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
+
+
+
+class ScrollPatternGenerator {
+    private int currentRow;
+    private int topRow;
+    private int bottomRow;
+    private enum ScrollDirection {DOWN, UP};
+    private ScrollDirection direction;
+
+    public ScrollPatternGenerator (int topRow, int bottomRow) {
+        this.topRow = topRow;
+        this.bottomRow = bottomRow;
+        direction = ScrollDirection.DOWN;
+        currentRow = topRow;
+    }
+
+    public int next() {
+        if (currentRow == bottomRow) {
+            direction = ScrollDirection.UP;
+        } else if (currentRow == topRow) {
+            direction = ScrollDirection.DOWN;
+        }
+
+        if (direction == ScrollDirection.DOWN) {
+            currentRow++;
+        } else {
+            currentRow--;
+        }
+        return currentRow;
+    }
+}
+
 
 public class MainFragment extends BrowseFragment {
     private static final String TAG = "MainFragment";
 
-    private static final int BACKGROUND_UPDATE_DELAY = 300;
     private static final int GRID_ITEM_WIDTH = 200;
     private static final int GRID_ITEM_HEIGHT = 200;
     private static final int NUM_ROWS = 20;
-    private static final int NUM_COLS = 4;
+    private static final int mInitialDelay = 0;
+    private static final int mScrollInterval = 400;
+    private static final int mScrollCount = 100;
+    private static final int START_ROW = 4;
 
     private final Handler mHandler = new Handler();
     private ArrayObjectAdapter mRowsAdapter;
     private DisplayMetrics mMetrics;
     private BackgroundManager mBackgroundManager;
+
+    private Timer mAutoScrollTimer;
+    private int mAutoScrollCount;
+    private ScrollPatternGenerator mScrollPatternGenerator;
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -67,6 +109,12 @@ public class MainFragment extends BrowseFragment {
         setupUIElements();
 
         setupEventListeners();
+
+        // [old scrolling mechanism]
+        startAutoScrollTimer(mInitialDelay, mScrollInterval, mScrollCount);
+
+        // [new scrolling mechanism]
+        mScrollPatternGenerator = new ScrollPatternGenerator(START_ROW, NUM_ROWS - 1 - START_ROW);
     }
 
     @Override
@@ -161,6 +209,38 @@ public class MainFragment extends BrowseFragment {
                 }
             }
         }
+    }
+
+
+    private class UpdateAutoScrollTask extends TimerTask {
+        // TODO
+        @Override
+        public void run() {
+            mHandler.post(new Runnable() {
+                @Override
+                public void run() {
+                    if (mAutoScrollCount == 0) {
+                        mAutoScrollTimer.cancel();
+                        return;
+                    }
+                    setSelectedPosition(mScrollPatternGenerator.next());
+                    mAutoScrollCount --;
+                }
+            });
+        }
+    }
+
+    private void startAutoScrollTimer(int initialDelay, int interval, int count) {
+        if (mAutoScrollTimer != null) {
+            mAutoScrollTimer.cancel();
+        }
+        mAutoScrollCount = count;
+        mAutoScrollTimer = new Timer();
+        mAutoScrollTimer.schedule(new UpdateAutoScrollTask(), initialDelay, interval);
+    }
+
+    public void selectRow(int row) {
+        setSelectedPosition(row);
     }
 
     private class GridItemPresenter extends Presenter {
