@@ -76,7 +76,7 @@ public class MainFragment extends BrowseFragment {
     private static final int mInitialDelay = 0;
     private static final int mScrollInterval = 200;
     private static final int mScrollCount = 100;
-    private static final boolean mShadow = false;
+    private static final boolean mShadow = true;
 
     private final Handler mHandler = new Handler();
     private ArrayObjectAdapter mRowsAdapter;
@@ -146,14 +146,14 @@ public class MainFragment extends BrowseFragment {
 
         mBackgroundManager = BackgroundManager.getInstance(getActivity());
         mBackgroundManager.attach(getActivity().getWindow());
-        mBackgroundManager.setDrawable(getActivity().getResources().getDrawable(R.drawable.default_background, getContext().getTheme()));
+        mBackgroundManager.setDrawable(getActivity().getResources().getDrawable(R.drawable.default_background, null/*getContext().getTheme()*/));
         mMetrics = new DisplayMetrics();
         getActivity().getWindowManager().getDefaultDisplay().getMetrics(mMetrics);
     }
 
     private void setupUIElements() {
         setBadgeDrawable(getActivity().getResources().getDrawable(
-             R.drawable.videos_by_google_banner, getContext().getTheme()));
+             R.drawable.videos_by_google_banner, null /*getContext().getTheme()*/));
         setTitle("Leanback Debug"); // Badge, when set, takes precedent over title
         setHeadersState(HEADERS_ENABLED);
         setHeadersTransitionOnBackEnabled(true);
@@ -161,9 +161,9 @@ public class MainFragment extends BrowseFragment {
         Theme theme = getContext().getTheme();
 
         // set fastLane (or headers) background color
-        setBrandColor(getResources().getColor(R.color.fastlane_background, theme));
+        setBrandColor(getResources().getColor(R.color.fastlane_background, null/*theme*/));
         // set search icon color
-        setSearchAffordanceColor(getResources().getColor(R.color.search_opaque, theme));
+        setSearchAffordanceColor(getResources().getColor(R.color.search_opaque, null/*theme*/));
 
         setHeaderPresenterSelector(new PresenterSelector() {
             @Override
@@ -171,6 +171,7 @@ public class MainFragment extends BrowseFragment {
                 return new IconHeaderItemPresenter();
             }
         });
+
     }
 
     private void setupEventListeners() {
@@ -200,6 +201,28 @@ public class MainFragment extends BrowseFragment {
             });
         }
     }
+/*
+    private class OldUpdateAutoScrollTask extends TimerTask {
+        @Override
+        public void run() {
+            mHandler.post(new Runnable() {
+                @Override
+                public void run() {
+                    if (mAutoScrollCount == 0) {
+                        mAutoScrollTimer.cancel();
+                        return;
+                    }
+                    if (mAutoScrollCount % 2 == 0) {
+                        setSelectedPosition(NUM_ROWS - 1);
+                    }else {
+                        setSelectedPosition(0);
+                    }
+                    mAutoScrollCount --;
+                }
+            });
+        }
+    }
+*/
 
     private void startAutoScrollTimer(int initialDelay, int interval, int count) {
         if (mAutoScrollTimer != null) {

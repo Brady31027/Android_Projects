@@ -21,6 +21,9 @@ import android.util.Log;
 import android.view.ViewGroup;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.drawable.GlideDrawable;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 
 /*
  * A CardPresenter is used to generate Views and bind Objects to them on demand.
@@ -68,15 +71,28 @@ public class CardPresenter extends Presenter {
     @Override
     public void onBindViewHolder(Presenter.ViewHolder viewHolder, Object item) {
         Movie movie = (Movie) item;
-        ImageCardView cardView = (ImageCardView) viewHolder.view;
+        final ImageCardView cardView = (ImageCardView) viewHolder.view;
 
         cardView.setTitleText(movie.getTitle());
         cardView.setContentText(movie.getStudio());
         cardView.setMainImageDimensions(CARD_WIDTH, CARD_HEIGHT);
+
         Glide.with(viewHolder.view.getContext())
                 .load(R.drawable.gradation)
                 .centerCrop()
                 .error(mDefaultCardImage)
+                .listener(new RequestListener<Integer, GlideDrawable>() {
+                    @Override
+                    public boolean onException(Exception e, Integer model, Target<GlideDrawable> target, boolean isFirstResource) {
+                        return false;
+                    }
+
+                    @Override
+                    public boolean onResourceReady(GlideDrawable resource, Integer model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
+                        cardView.setBackground(null);
+                        return false;
+                    }
+                })
                 .into(cardView.getMainImageView());
 
     }
