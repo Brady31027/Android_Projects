@@ -86,10 +86,7 @@ public class MySurfaceView extends SurfaceView implements SurfaceHolder.Callback
             } catch (Exception e) {
                 Log.e("Sleep", "Cannot Sleep");
             }
-            //final Bitmap bitmap = screenShot(surfaceView);
         }
-
-
 
         new Thread() {
             public void run() {
@@ -105,7 +102,7 @@ public class MySurfaceView extends SurfaceView implements SurfaceHolder.Callback
                     }
 
                     Bitmap bitmap = screenShot(surfaceView);
-                    
+
                     if (dumpPNG) {
                         String outputFolder = MySurfaceView.this.getContext().getExternalFilesDir(null).getAbsolutePath();
                         saveVectorDrawableIntoPNG(bitmap, outputFolder, "SurfaceView");

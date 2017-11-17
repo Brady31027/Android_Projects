@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"/>
+    <link rel="stylesheet" href="../css/style.css"/>
+</head>
+<body>
+	<ul class="index">
+        <li><a class="push" >A simple page1<img src="../img/next.png" alt="next"></a></li>
+        <li><a class="push" >A simple page2<img src="../img/next.png" alt="next"></a></li>
+        <li><a class="push" >A simple page3<img src="../img/next.png" alt="next"></a></li>
+        <li><a class="push" >A simple page4<img src="../img/next.png" alt="next"></a></li>
+        <li><a class="push" >A simple page5<img src="../img/next.png" alt="next"></a></li>
+    </ul>
+
+	<script type="text/javascript" src="../js/cobalt.js"></script>
+	<script>
+        cobalt.init({
+        	debug: true,
+        	debugInBrowser: true,
+        	events: {
+        		"sayHello" : function( data, callback ) {
+                    cobalt.log('native is saying hello and sent data=', data);
+                },
+        		"pullToRefresh" : function (data, callback) {
+        			cobalt.log("Ask for refreshing...");
+        			//doRefresh(callback);
+        			cobalt.log("Refreshing done.")
+        		}
+        	}
+        });
+
+     
+	</script>
+</body>
+</html>

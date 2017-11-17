@@ -1,0 +1,47 @@
+<ion-menu [content]="mainContent">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>
+        Perference
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content id="side-menu21">
+    <ion-list id="menu-list2">
+      <ion-item color="none" id="menu-list-item4" style="background-color: #000 !important;">
+        <ion-avatar item-left>
+          <img src="assets/imgs/oliver.jpg"/>
+        </ion-avatar>
+        <h2 style="color: #FFF !important;">
+          Oliver Chen
+        </h2>
+        <h3 style="color: #FFF !important;">4.9 &#9733;</h3>
+      </ion-item>
+    </ion-list>
+    <ion-list id="menu-list3">
+      <ion-item color="none" id="menu-list-item12">
+        Payment Setting
+      </ion-item>
+      <ion-item color="none" id="menu-list-item13">
+        Personal Setting
+      </ion-item>
+      <ion-item color="none" id="menu-list-item14">
+        Get Coupons
+      </ion-item>
+      <ion-item color="none" id="menu-list-item15">
+        Feedback and Report
+      </ion-item>
+      <ion-item color="none" id="menu-list-item16">
+        Become a Service Provider
+      </ion-item>
+    </ion-list>
+    
+    <div id="menu-markdown3" style="text-align:center;" class="show-list-numbers-and-dots">
+      <p style="color:#000000;">
+        Software Version: v1.0.0
+      </p>
+    </div>
+  </ion-content>
+</ion-menu>
+
+<ion-nav #mainContent [root]="rootPage"></ion-nav>

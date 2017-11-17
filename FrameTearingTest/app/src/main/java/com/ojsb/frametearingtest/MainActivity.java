@@ -24,6 +24,7 @@ public class MainActivity extends Activity {
         mRootLayout = (LinearLayout) findViewById(R.id.root_layout);
         mBlackBackground = true;
 
+
         mRootLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
