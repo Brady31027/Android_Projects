@@ -1,0 +1,11 @@
+<com.ojsb.webviewtest.CircleClipFrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/circle_clip_frame_layout"
+    android:layout_width="@dimen/test_width"
+    android:layout_height="@dimen/test_height" >
+    <WebView
+        android:id="@+id/webview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </WebView>
+</com.ojsb.webviewtest.CircleClipFrameLayout>
